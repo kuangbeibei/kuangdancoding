@@ -26,8 +26,6 @@ export default function (props) {
         scrollTop
     } = props;
 
-    console.log('我拿到的scrollTop', scrollTop);
-
     const headerBackground = function () {
         if (scrollTop >= 160) {
             const opacity = Number(scrollTop/300)

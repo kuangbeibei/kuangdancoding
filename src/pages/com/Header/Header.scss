@@ -14,6 +14,7 @@ header {
         padding-left: 15px;
         padding-right: 15px;
         color: #fff;
+        transition: color .3s linear;
         .info {
             flex: 1;
             padding: 8px 16px;
@@ -32,15 +33,10 @@ header {
                     font-size: 15px;
                     text-transform: uppercase;
                     color: #fff;
+                    transition: color .1s linear;
                 }
             }
         }
-    }
-
-    &:after{
-        content: "";
-        display: block;
-        width: 0;
     }
 
     .header.scrollChange {
@@ -49,8 +45,13 @@ header {
             li {
                 a {
                     color: #000;
+                    transition: color .1s linear;
                 }
             }
+        }
+        button {
+            color: #000;
+            transition: color .1s linear;
         }
     }
 }
@@ -77,24 +78,25 @@ header {
             ul {
                 display: none;
             }
-        }
-        button {
-            fill: currentColor;
-            width: 1em;
-            display: inline-block;
-            font-size: 3em;
-            transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-            flex-shrink: 0;
-            user-select: none;
-            background: transparent !important;
-            border: 0 none !important;
-            outline: none;
-            text-align: center;
-            transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-            cursor: pointer;
-            svg {
-                display: flex;
-                width: 100%;
+            button {
+                fill: currentColor;
+                width: 1em;
+                display: inline-block;
+                font-size: 3em;
+                transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+                flex-shrink: 0;
+                user-select: none;
+                background: transparent !important;
+                border: 0 none !important;
+                outline: none;
+                text-align: center;
+                transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+                cursor: pointer;
+                color: #fff;
+                svg {
+                    display: flex;
+                    width: 100%;
+                }
             }
         }
     }

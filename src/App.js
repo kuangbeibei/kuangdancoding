@@ -1,9 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import "style/reset.css"
-
 import Header from "component/Header"
+import Main from "component/Main"
+import Home from "pages/Home"
+
+import "style/reset.css"
+import "style/global.css"
+
 
 
 let resizeTimer;
@@ -31,7 +35,7 @@ class App extends React.Component {
             this.setState({
                 scrollTop: window.scrollY
             })
-        }, 20)
+        }, 10)
     }
 
     componentDidMount () {
@@ -49,8 +53,9 @@ class App extends React.Component {
             <Router>
                 <div>
                     <Header {...this.state} />
+                    <Main Component = {Home} />
     
-                    <Route exact path="/" component={Home} />
+                    {/* <Route exact path="/" component={Home} /> */}
                     <Route path="/topics" component={Articles} />
                 </div>
             </Router>
@@ -59,14 +64,6 @@ class App extends React.Component {
 }
 
 
-
-function Home() {
-    return (
-        <div style={{height: '2000px'}}>
-            <h2>Home</h2>
-        </div>
-    );
-}
 
 function Article({match}) {
     return <h3>Requested Param: {match.params.name}</h3>;

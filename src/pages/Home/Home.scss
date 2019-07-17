@@ -1,0 +1,54 @@
+.home-wrap {
+    width: 100%;
+    text-align: center;
+    .avatar {
+        .img {
+            width: 100%;
+            margin: 0 auto;
+            max-width: 160px;
+            transform: translate3d(0, -50%, 0);
+            box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.24), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            vertical-align: middle;
+            border-style: none;
+            border-radius: 50%;
+            width: 160px;
+            height: 160px;
+            background: url('../../img/avatar.jpeg');
+            background-size: auto 115%;
+            background-position: 100% 10%;
+        }
+        h3 {
+            margin: -42px auto 0;
+            color: #3C4858;
+            font-family: "Roboto Slab", "Times New Roman", serif;
+            font-weight: 700;
+            font-size: 25px;
+            text-decoration: none;
+            line-height: 1.4em;
+        }
+        h6 {
+            margin-top: 24px;
+            text-transform: uppercase;
+            font-weight: 500;
+            font-family: Roboto,Helvetica,Arial,sans-serif;
+            line-height: 1.5em;
+        }
+    }
+}
+
+@media (min-width: 600px) {
+    .home-wrap {
+        flex-grow: 0;
+        max-width: 100%;
+        flex-basis: 100%;
+    }
+}
+
+@media (min-width: 960px) {
+    .home-wrap {
+        flex-grow: 0;
+        max-width: 50%;
+        flex-basis: 50%;
+    }
+}
