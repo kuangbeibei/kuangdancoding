@@ -1,42 +1,78 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-function App() {
-    return (
-        <Router>
-            <div>
-                <Header />
+import "style/reset.css"
 
-                <Route exact path="/" component={Home} />
-                <Route path="/about" component={About} />
-                <Route path="/topics" component={Articles} />
-            </div>
-        </Router>
-    )
+import Header from "component/Header"
+
+
+let resizeTimer;
+let scrollTimer;
+
+class App extends React.Component {
+
+    state = {
+        windowWidth: window.innerWidth,
+        scrollTop: 0
+    }
+
+    onWindowResize = () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            this.setState({
+                windowWidth: window.innerWidth
+            })
+        }, 100)
+    }
+
+    onWindowScroll = () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => {
+            this.setState({
+                scrollTop: window.scrollY
+            })
+        }, 20)
+    }
+
+    componentDidMount () {
+        window.addEventListener("resize", this.onWindowResize);
+        window.addEventListener('scroll', this.onWindowScroll)
+    }
+
+    componentWillUnmount () {
+        window.removeEventListener("resize", this.onWindowResize);
+        window.removeEventListener('scroll', this.onWindowScroll)
+    }
+
+    render () {
+        return (
+            <Router>
+                <div>
+                    <Header {...this.state} />
+    
+                    <Route exact path="/" component={Home} />
+                    <Route path="/topics" component={Articles} />
+                </div>
+            </Router>
+        )
+    }
 }
+
+
 
 function Home() {
-    return <h2>Home</h2>;
+    return (
+        <div style={{height: '2000px'}}>
+            <h2>Home</h2>
+        </div>
+    );
 }
 
-function About() {
-    return <h2>About</h2>;
-}
-
-function Article(obj) {
-    const {
-        match
-    } = obj;
-
-    console.log('match', match);
+function Article({match}) {
     return <h3>Requested Param: {match.params.name}</h3>;
 }
 
-function Articles(obj) {
-    console.log('obj', obj);
-    const {
-        match
-    } = obj;
+function Articles({match}) {
     return (
         <div>
             <h2>Topics</h2>
@@ -44,7 +80,7 @@ function Articles(obj) {
             <ul>
                 <li>
                     <Link to={`${match.url}/components`}>Components</Link>
-                    </li>
+                </li>
                 <li>
                     <Link to={`${match.url}/props-v-state`}>Props v. State</Link>
                 </li>
@@ -60,20 +96,4 @@ function Articles(obj) {
     );
 }
 
-function Header() {
-    return (
-        <ul>
-            <li>
-                <Link to="/">Home</Link>
-            </li>
-             <li>
-                <Link to="/about">About</Link>
-            </li>
-             <li>
-                <Link to="/topics">Topics</Link>
-            </li>
-        </ul>
-    );
-}
-
-export default App;
+export default App

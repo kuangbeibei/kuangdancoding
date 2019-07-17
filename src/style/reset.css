@@ -113,8 +113,11 @@ body {
 body {
   line-height: 1;
   font-size: 12px;
-  overflow: hidden;
-  font-family: "Pingfangsc-regular", "Helvetica neue", "Arial", "Microsoft Yahei", "Songti SC"
+  /* font-family: "Pingfangsc-regular", "Helvetica neue", "Arial", "Microsoft Yahei", "Songti SC" */
+  font-family:  "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 300;
+  line-height: 1.5em;
+  height: 2000px;
 }
 
 ol,
@@ -152,7 +155,6 @@ strong {
 
 a {
   text-decoration: none;
-  color: #006eff
 }
 
 .none {
