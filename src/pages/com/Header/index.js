@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Header.scss"
 
 const sideMenu = (innerWidth) => {
@@ -44,17 +44,19 @@ export default function (props) {
                     className={`header ${scrollTop > 160 ? "scrollChange" : ''}`} 
                 >
 
-                    <div className="info">{`Design & Coding`}</div>
+                    <div className="info">
+                        <NavLink to="/blog" activeClassName="selected">{`Kuang's blog`}</NavLink>
+                    </div>
 
                     <ul>
                         <li>
-                            <Link to="/">Home</Link>
+                            <NavLink to="/" exact activeClassName="selected">Home</NavLink>
                         </li>
                         <li>
-                            <Link to="/about">About</Link>
+                            <NavLink to="/about" activeClassName="selected">About</NavLink>
                         </li>
                         <li>
-                            <Link to="/topics">Topics</Link>
+                            <NavLink to="/articles" activeClassName="selected">Articles</NavLink>
                         </li>
                     </ul>
                     

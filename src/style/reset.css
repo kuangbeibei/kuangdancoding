@@ -84,7 +84,6 @@ video {
   border: 0;
   font-size: 100%;
   vertical-align: baseline;
-  font-family: STHeiti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-overflow-scrolling: touch; 
@@ -113,8 +112,6 @@ body {
 body {
   line-height: 1;
   font-size: 12px;
-  /* font-family: "Pingfangsc-regular", "Helvetica neue", "Arial", "Microsoft Yahei", "Songti SC" */
-  font-family:  "Roboto", "Helvetica", "Arial", sans-serif;
   font-weight: 300;
   line-height: 1.5em;
 }
@@ -190,4 +187,11 @@ input.input_flie[type=file] {
     top: 0 !important;
     margin: 0 5px;
   }
+}
+
+button {
+  padding: 0;
+  border: 0 none;
+  outline: none;
+  background: transparent;
 }

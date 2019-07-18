@@ -1,13 +1,15 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 import Header from "component/Header"
 import Main from "component/Main"
+import About from "component/About"
+import Blog from "component/Blog"
 import Home from "pages/Home"
 
+import "style/font.css"
 import "style/reset.css"
 import "style/global.css"
-
 
 
 let resizeTimer;
@@ -53,17 +55,30 @@ class App extends React.Component {
             <Router>
                 <div>
                     <Header {...this.state} />
-                    <Main Component = {Home} />
     
                     {/* <Route exact path="/" component={Home} /> */}
-                    <Route path="/topics" component={Articles} />
+                    <Route path="/articles" component={Articles} />
+
+                    <Switch>
+
+                        <Route exact path="/" component={() => {
+                            return <Main Component = {Home} />
+                        }}/>
+
+                        <Route path="/about" component={() => {
+                            return <Main Component = {About} />
+                        }}/>
+
+                        <Route path="/blog" component={() => {
+                            return <Main Component = {Blog} />
+                        }}/>
+        
+                    </Switch>
                 </div>
             </Router>
         )
     }
 }
-
-
 
 function Article({match}) {
     return <h3>Requested Param: {match.params.name}</h3>;
@@ -72,7 +87,7 @@ function Article({match}) {
 function Articles({match}) {
     return (
         <div>
-            <h2>Topics</h2>
+            <h2>Articles</h2>
 
             <ul>
                 <li>
