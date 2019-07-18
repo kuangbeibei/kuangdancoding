@@ -23,7 +23,6 @@ header {
             cursor: pointer;
             a {
                 color: #fff;
-                transition: color .1s linear;
             }
         }
         ul {
@@ -38,13 +37,12 @@ header {
                     font-size: 15px;
                     text-transform: uppercase;
                     color: #fff;
-                    transition: color .1s linear;
                 }
             }
         }
         a.selected {
             font-weight: bold;
-            transition: font-weight .1s ease-in;
+            transition: font-weight .3s linear;
         }
     }
 

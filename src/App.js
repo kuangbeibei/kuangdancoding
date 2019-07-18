@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 import Header from "component/Header"
 import Main from "component/Main"
-import About from "component/About"
-import Blog from "component/Blog"
+import About from "pages/About"
+import Blog from "pages/Blog"
 import Home from "pages/Home"
 
 import "style/font.css"
