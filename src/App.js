@@ -3,13 +3,15 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 import Header from "component/Header"
 import Main from "component/Main"
+import Sidemenu from "component/Sidemenu"
 import About from "pages/About"
 import Blog from "pages/Blog"
 import Home from "pages/Home"
 
+
 import "style/font.css"
 import "style/reset.css"
-import "style/global.css"
+import "style/global.scss"
 
 
 let resizeTimer;
@@ -19,7 +21,19 @@ class App extends React.Component {
 
     state = {
         windowWidth: window.innerWidth,
-        scrollTop: 0
+        scrollTop: 0,
+        sideMenuVisible: false,
+        sideMenuActive: false
+    }
+
+    componentDidMount () {
+        window.addEventListener("resize", this.onWindowResize);
+        window.addEventListener('scroll', this.onWindowScroll)
+    }
+
+    componentWillUnmount () {
+        window.removeEventListener("resize", this.onWindowResize);
+        window.removeEventListener('scroll', this.onWindowScroll)
     }
 
     onWindowResize = () => {
@@ -40,42 +54,104 @@ class App extends React.Component {
         }, 10)
     }
 
-    componentDidMount () {
-        window.addEventListener("resize", this.onWindowResize);
-        window.addEventListener('scroll', this.onWindowScroll)
+    showSideMenu = () => {
+        this.setState({
+            sideMenuVisible: true
+        }, () => {
+            setTimeout(() => {
+                this.setState({
+                    sideMenuActive: true
+                })
+                document.body.className = "overflow-hidden"
+            }, 100)
+        })
     }
 
-    componentWillUnmount () {
-        window.removeEventListener("resize", this.onWindowResize);
-        window.removeEventListener('scroll', this.onWindowScroll)
+    hideSideMenu = () => {
+        this.setState({
+            sideMenuActive: false,
+        }, () => {
+            setTimeout(() => {
+                this.setState({
+                    sideMenuVisible: false
+                })
+                document.body.className = ""
+            }, 100)
+        })
+    }
+
+    toggleSideMenu = () => {
+        const {
+            sideMenuVisible,
+            sideMenuActive
+        } = this.state;
+
+        if (sideMenuVisible) {
+            return (
+                <Sidemenu 
+                    sideMenuActive = {sideMenuActive} 
+                    hideSideMenu = {this.hideSideMenu.bind(this)}
+                />
+            ) 
+        } else {
+            return null
+        }
     }
 
     render () {
+        const {
+            sideMenuActive,
+            scrollTop
+        } = this.state;
+
         return (
-            <Router>
-                <div>
-                    <Header {...this.state} />
-    
-                    {/* <Route exact path="/" component={Home} /> */}
-                    <Route path="/articles" component={Articles} />
+            <>
+                <Router>
+                    <div className={`wrap-container ${sideMenuActive ? "side-move-show-menu" : ""}`}>
+                        <Header 
+                            {...this.state} 
+                            showSideMenu = {this.showSideMenu.bind(this)}
+                        />
+                        {/* <div style = {{height: '200px'}}></div> */}
 
-                    <Switch>
+                        <Route path="/articles" component={Articles} />
 
-                        <Route exact path="/" component={() => {
-                            return <Main Component = {Home} />
-                        }}/>
+                        <Switch>
 
-                        <Route path="/about" component={() => {
-                            return <Main Component = {About} />
-                        }}/>
+                            <Route exact path="/" component={() => {
+                                return (
+                                    <Main 
+                                        Component = {Home} 
+                                        scrollTop = {scrollTop}
+                                    />
+                                )
+                            }}/>
 
-                        <Route path="/blog" component={() => {
-                            return <Main Component = {Blog} />
-                        }}/>
-        
-                    </Switch>
-                </div>
-            </Router>
+                            <Route path="/about" component={() => {
+                                return (
+                                    <Main 
+                                        Component = {About} 
+                                        scrollTop = {scrollTop}
+                                    />
+                                )
+                            }}/>
+
+                            <Route path="/blog" component={() => {
+                                return (
+                                    <Main 
+                                        Component = {Blog} 
+                                        scrollTop = {scrollTop}
+                                    />
+                                )
+                            }}/>
+            
+                        </Switch>
+                    </div>
+                </Router>
+                {
+                    this.toggleSideMenu()
+                }
+            </>
         )
     }
 }

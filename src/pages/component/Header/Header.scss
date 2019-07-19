@@ -1,18 +1,18 @@
-header {
+.hader-wrap {
     position: fixed;
+    top: 0;
     z-index: 1100;
-    padding: 15px 0 15px;
     width: 100%;
     box-shadow: 0 4px 18px 0px rgba(0, 0, 0, 0.12), 0 7px 10px -5px rgba(0, 0, 0, 0.15);
-    transition: background .3s linear;
+    transition: background 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     .header {
         display: flex;
-        min-height: 50px;
         align-items: center;
         margin-left: auto;
         margin-right: auto;
         padding-left: 15px;
         padding-right: 15px;
+        min-height: 50px;
         color: #fff;
         transition: color .3s linear;
         .info {
@@ -45,12 +45,13 @@ header {
             transition: font-weight .3s linear;
         }
     }
-
-    .header.scrollChange {
-        color: #000;
+}
+.hader-wrap.scrollChange {
+    .header {
         .info {
             a {
                 color: #000;
+                transition: color .1s linear;
             }
         }
         ul {
@@ -68,41 +69,25 @@ header {
     }
 }
 
-.bg-pic {
-    position: relative;
-    width: 100%;
-    height: 380px;
-    background: url('../../../img/bg.jpg');
-    background-size: cover;
-    background-position: center center;
-    &::before {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-    }
-}
-
 @media (max-width: 959.95px) {
-    header {
+    .hader-wrap {
         .header {
             ul {
                 display: none;
             }
             button {
+                display: inline-block;
+                margin-right: 15px;
                 fill: currentColor;
                 width: 1em;
-                display: inline-block;
-                font-size: 3em;
-                transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+                font-size: 2em;
                 flex-shrink: 0;
                 user-select: none;
                 background: transparent !important;
                 border: 0 none !important;
                 outline: none;
                 text-align: center;
-                transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+                transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
                 cursor: pointer;
                 color: #fff;
                 svg {
@@ -115,7 +100,7 @@ header {
 }
 
 @media (min-width: 576px) {
-    header {
+    .hader-wrap {
         .header {
             max-width: 540px;
         }
@@ -123,7 +108,7 @@ header {
 }
 
 @media (min-width: 768px) {
-    header {
+    .hader-wrap {
         .header {
             max-width: 720px;
         }
@@ -131,7 +116,7 @@ header {
 }
 
 @media (min-width: 992px) {
-    header {
+    .hader-wrap {
         .header {
             max-width: 960px;
         }
@@ -139,7 +124,7 @@ header {
 }
 
 @media (min-width: 1200px) {
-    header {
+    .hader-wrap {
         .header {
             max-width: 1140px;
         }

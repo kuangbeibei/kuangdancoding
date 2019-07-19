@@ -274,7 +274,7 @@ module.exports = function(webpackEnv) {
         'react-native': 'react-native-web',
         'style': paths.resolveApp('src/style'),
         'pages': paths.resolveApp('src/pages'),
-        'component': paths.resolveApp('src/pages/com'),
+        'component': paths.resolveApp('src/pages/component'),
         'img': paths.resolveApp('src/img')
       },
       plugins: [
