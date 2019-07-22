@@ -30,6 +30,7 @@ export default function ({match}) {
     }
 
     // 问题，控制台偶尔会出现 ....To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
+    // https://github.com/facebook/react/issues/14227
 
     return (
         <div className="article-wrap">
