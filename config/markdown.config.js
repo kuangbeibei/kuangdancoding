@@ -54,7 +54,7 @@ readAllFile(path.resolve('src/markdown')).then(res => {
     res.forEach(item => {
         const d = (Object.keys(item))[0];
         const title = item[d].title.slice(0, -3);
-        markdownContent += `[${title}](www.kuangdancoding.com/articles/${d}/${title})\n` 
+        markdownContent += `[${title}](http://www.kuangdancoding.com/articles/${d}/${title})\n` 
     })
     fs.writeFileSync("./README.md", markdownContent)
 }).catch(err => {
