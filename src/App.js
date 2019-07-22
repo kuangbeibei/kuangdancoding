@@ -1,12 +1,14 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Header from "component/Header"
 import Main from "component/Main"
 import Sidemenu from "component/Sidemenu"
+
 import About from "pages/About"
 import Blog from "pages/Blog"
 import Home from "pages/Home"
+import Articles from "pages/Articles"
 
 
 import "style/font.css"
@@ -14,8 +16,10 @@ import "style/reset.css"
 import "style/global.scss"
 
 
-let resizeTimer;
-let scrollTimer;
+// let resizeTimer;
+// let scrollTimer;
+
+// let count = 0;
 
 class App extends React.Component {
 
@@ -27,6 +31,7 @@ class App extends React.Component {
     }
 
     componentDidMount () {
+        // 这个生命周期只有一次
         window.addEventListener("resize", this.onWindowResize);
         window.addEventListener('scroll', this.onWindowScroll)
     }
@@ -37,21 +42,29 @@ class App extends React.Component {
     }
 
     onWindowResize = () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
+        // clearTimeout(resizeTimer);
+        // resizeTimer = setTimeout(() => {
+        //     this.setState({
+        //         windowWidth: window.innerWidth
+        //     })
+        // }, 100)
+        requestAnimationFrame(() => {
             this.setState({
                 windowWidth: window.innerWidth
             })
-        }, 100)
+        })
     }
 
     onWindowScroll = () => {
-        clearTimeout(scrollTimer);
-        scrollTimer = setTimeout(() => {
+        // clearTimeout(scrollTimer);
+        requestAnimationFrame(() => {
             this.setState({
                 scrollTop: window.scrollY
             })
-        }, 10)
+        })
+        // scrollTimer = setTimeout(() => {
+            
+        // }, 10)
     }
 
     showSideMenu = () => {
@@ -98,6 +111,7 @@ class App extends React.Component {
         }
     }
 
+
     render () {
         const {
             sideMenuActive,
@@ -112,9 +126,6 @@ class App extends React.Component {
                             {...this.state} 
                             showSideMenu = {this.showSideMenu.bind(this)}
                         />
-                        {/* <div style = {{height: '200px'}}></div> */}
-
-                        <Route path="/articles" component={Articles} />
 
                         <Switch>
 
@@ -144,6 +155,16 @@ class App extends React.Component {
                                     />
                                 )
                             }}/>
+
+                            <Route path="/articles" component={({match}) => {
+                                return (
+                                    <Main 
+                                        Component = {Articles}
+                                        scrollTop = {scrollTop}
+                                        match = {match}
+                                    />
+                                )
+                            }} />
             
                         </Switch>
                     </div>
@@ -154,34 +175,6 @@ class App extends React.Component {
             </>
         )
     }
-}
-
-function Article({match}) {
-    return <h3>Requested Param: {match.params.name}</h3>;
-}
-
-function Articles({match}) {
-    return (
-        <div>
-            <h2>Articles</h2>
-
-            <ul>
-                <li>
-                    <Link to={`${match.url}/components`}>Components</Link>
-                </li>
-                <li>
-                    <Link to={`${match.url}/props-v-state`}>Props v. State</Link>
-                </li>
-            </ul>
-
-            <Route path={`${match.path}/:name`} component={Article} />
-            <Route
-                exact
-                path={match.path}
-                render={() => <h3>Please select a topic.</h3>}
-            />
-        </div>
-    );
 }
 
 export default App

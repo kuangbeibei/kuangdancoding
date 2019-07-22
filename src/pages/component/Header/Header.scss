@@ -4,7 +4,7 @@
     z-index: 1100;
     width: 100%;
     box-shadow: 0 4px 18px 0px rgba(0, 0, 0, 0.12), 0 7px 10px -5px rgba(0, 0, 0, 0.15);
-    transition: background 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    transition: background 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     .header {
         display: flex;
         align-items: center;
@@ -87,7 +87,7 @@
                 border: 0 none !important;
                 outline: none;
                 text-align: center;
-                transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+                transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, fill 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
                 cursor: pointer;
                 color: #fff;
                 svg {

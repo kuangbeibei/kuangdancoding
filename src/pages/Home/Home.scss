@@ -1,19 +1,23 @@
 .home-wrap {
     width: 100%;
     text-align: center;
+    transform: translate3d(0, -100px, 0);
     .avatar {
+        overflow: hidden;
+        width: 100%;
+        margin: 0 auto;
+        max-width: 160px;
+        transform: translate3d(0, -100px, 0);
+        box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.24), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+        border-radius: 50%;
+        vertical-align: middle;
+        border-style: none;
+        border-radius: 50%;
+        width: 160px;
+        height: 160px;
         .img {
             width: 100%;
-            margin: 0 auto;
-            max-width: 160px;
-            transform: translate3d(0, -50%, 0);
-            box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.24), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
-            border-radius: 50%;
-            vertical-align: middle;
-            border-style: none;
-            border-radius: 50%;
-            width: 160px;
-            height: 160px;
+            height: 100%;
             background: url('../../img/avatar.jpeg');
             background-size: auto 115%;
             background-position: 100% 10%;

@@ -1,0 +1,40 @@
+.articles-wrap {
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+    h2 {
+        margin-bottom: 60px;
+        font-family: "Roboto Slab", "Times New Roman", serif;
+        font-size: 25px;
+    }
+    li {
+        margin-bottom: 12px;
+        cursor: pointer;
+        a {
+            color: #000;
+            text-transform: uppercase;
+            font-family: Roboto,Helvetica,Arial,sans-serif;
+            line-height: 1.5em;
+            font-size: 14px;
+            &:hover {
+                color: #999;
+            }
+        }
+    }
+}
+
+@media (min-width: 600px) {
+    .articles-wrap {
+        flex-grow: 0;
+        max-width: 100%;
+        flex-basis: 100%;
+    }
+}
+
+@media (min-width: 960px) {
+    .articles-wrap {
+        flex-grow: 0;
+        max-width: 50%;
+        flex-basis: 50%;
+    }
+}
