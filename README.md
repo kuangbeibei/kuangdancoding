@@ -1,5 +1,2 @@
-[first](http://www.kuangdancoding.com/articles/2019-07-20/first)
-        [fourth](http://www.kuangdancoding.com/articles/2019-07-21/fourth)
-        [second](http://www.kuangdancoding.com/articles/2019-07-21/second)
-        [third](http://www.kuangdancoding.com/articles/2019-07-21/third)
+[开篇：创建自己的网站](http://www.kuangdancoding.com/articles/2019-07-20/开篇：创建自己的网站)
         

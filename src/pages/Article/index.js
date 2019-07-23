@@ -34,7 +34,9 @@ export default function ({match}) {
 
     return (
         <div className="article-wrap">
-            <ReactMarkdown source = {content || record[title]} />
+            <section className="article-section">
+                <ReactMarkdown source = {content || record[title]} />
+            </section>
         </div>
     );
 }
