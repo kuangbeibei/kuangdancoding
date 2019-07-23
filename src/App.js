@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
+import Loading from "component/Loading"
 import Header from "component/Header"
 import Main from "component/Main"
 import Sidemenu from "component/Sidemenu"
@@ -9,7 +10,6 @@ import About from "pages/About"
 import Blog from "pages/Blog"
 import Home from "pages/Home"
 import Articles from "pages/Articles"
-
 
 import "style/font.css"
 import "style/reset.css"
@@ -27,18 +27,22 @@ class App extends React.Component {
         windowWidth: window.innerWidth,
         scrollTop: 0,
         sideMenuVisible: false,
-        sideMenuActive: false
+        sideMenuActive: false,
+        loadingVisible: true,
+        loadingActive: true,
     }
 
     componentDidMount () {
         // 这个生命周期只有一次
         window.addEventListener("resize", this.onWindowResize);
-        window.addEventListener('scroll', this.onWindowScroll)
+        window.addEventListener('scroll', this.onWindowScroll);
+        window.addEventListener('load', this.onWindowLoad)
     }
 
     componentWillUnmount () {
         window.removeEventListener("resize", this.onWindowResize);
-        window.removeEventListener('scroll', this.onWindowScroll)
+        window.removeEventListener('scroll', this.onWindowScroll);
+        window.removeEventListener('load', this.onWindowLoad);
     }
 
     onWindowResize = () => {
@@ -66,6 +70,7 @@ class App extends React.Component {
             
         // }, 10)
     }
+
 
     showSideMenu = () => {
         this.setState({
@@ -106,16 +111,43 @@ class App extends React.Component {
                     hideSideMenu = {this.hideSideMenu.bind(this)}
                 />
             ) 
-        } else {
-            return null
-        }
+        } else return null
+    }
+
+    onWindowLoad = () => {
+        setTimeout(() => {
+            this.setState({
+                loadingActive: false
+            }, () => {
+                setTimeout(() => {
+                    this.setState({
+                        loadingVisible: false
+                    })
+                }, 1000)
+            })
+        }, 500)
+    }
+
+    hideLoading = () => {
+        const {
+            loadingActive,
+            loadingVisible
+        } = this.state;
+
+        if (loadingVisible) {
+            return (
+                <Loading 
+                    loadingActive = {loadingActive}
+                />
+            )
+        } else return null
     }
 
 
     render () {
         const {
             sideMenuActive,
-            scrollTop
+            scrollTop,
         } = this.state;
 
         return (
@@ -169,9 +201,17 @@ class App extends React.Component {
                         </Switch>
                     </div>
                 </Router>
+
+                {/* 侧边栏 */}
                 {
                     this.toggleSideMenu()
                 }
+
+                {/* loading */}
+                {
+                    this.hideLoading()
+                }
+                
             </>
         )
     }

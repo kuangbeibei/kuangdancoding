@@ -45,7 +45,6 @@ async function readAllFile(dirPath, sec) {
 }
 
 readAllFile(path.resolve('src/markdown')).then(res => {
-    console.log('res', res);
     fs.writeFileSync(path.resolve('src/data/data.json'), JSON.stringify(res));
 
     // 整理README
@@ -57,15 +56,12 @@ readAllFile(path.resolve('src/markdown')).then(res => {
         markdownContent += `[${title}](http://www.kuangdancoding.com/articles/${d}/${title})
         \r` 
     })
+
     fs.writeFileSync("./README.md", markdownContent)
 }).catch(err => {
     console.log('err', err);
 })
 
-
-// [{"2019-07-20":{"title":"first.md","createTime":"2019-7-22 10:59:07"}},{"2019-07-21":{"title":"second.md","createTime":"2019-7-22 15:31:36"}},{"2019-07-21":{"title":"third.md","createTime":"2019-7-22 15:31:52"}}]
-
-// {"2019-07-20":{"title":"first.md","createTime":"2019-7-22 10:59:07"}}
 
 
 
