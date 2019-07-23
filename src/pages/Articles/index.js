@@ -7,7 +7,7 @@ import Article from "pages/Article"
 
 import "./Articles.scss"
 
-export default function ({match}) {
+export default function ({match, history}) {
 
     return (
         <>
@@ -33,7 +33,8 @@ export default function ({match}) {
 
                 <Route 
                     path = {`${match.path}/:date/:title`}
-                    component={Article} 
+                    component={Article}
+                    history = {history}
                     // render = {() => {
                     //     return <Article match = {match} />
                     // }}

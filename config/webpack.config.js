@@ -277,7 +277,8 @@ module.exports = function(webpackEnv) {
         'component': paths.resolveApp('src/pages/component'),
         'img': paths.resolveApp('src/img'),
         'data': paths.resolveApp('src/data'),
-        'markdwon': paths.resolveApp('src/markdown')
+        'markdwon': paths.resolveApp('src/markdown'),
+        'hooks': paths.resolveApp('src/hooks')
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding

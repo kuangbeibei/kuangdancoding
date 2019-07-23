@@ -5,6 +5,7 @@ import Loading from "component/Loading"
 import Header from "component/Header"
 import Main from "component/Main"
 import Sidemenu from "component/Sidemenu"
+import NoMatch from "component/NoMatch"
 
 import About from "pages/About"
 import Blog from "pages/Blog"
@@ -153,6 +154,7 @@ class App extends React.Component {
         return (
             <>
                 <Router>
+
                     <div className={`wrap-container ${sideMenuActive ? "side-move-show-menu" : ""}`}>
                         <Header 
                             {...this.state} 
@@ -181,32 +183,45 @@ class App extends React.Component {
 
                             <Route path="/blog" component={() => {
                                 return (
-                                    <Main 
+                                    <Main
                                         Component = {Blog} 
                                         scrollTop = {scrollTop}
                                     />
                                 )
                             }}/>
 
-                            <Route path="/articles" component={({match}) => {
+                            <Route path="/articles" component={({match, history}) => {
                                 return (
                                     <Main 
                                         Component = {Articles}
                                         scrollTop = {scrollTop}
                                         match = {match}
+                                        history = {history}
                                     />
                                 )
                             }} />
-            
+
+                            <Route component={({history}) => {
+                                return (
+                                    <Main 
+                                        Component = {NoMatch}
+                                        history = {history}
+                                    />
+                                )
+                            }} />
+                            
                         </Switch>
+
+                        
                     </div>
+
+                    {/* 侧边栏 */}
+                    {
+                        this.toggleSideMenu()
+                    }
                 </Router>
 
-                {/* 侧边栏 */}
-                {
-                    this.toggleSideMenu()
-                }
-
+                
                 {/* loading */}
                 {
                     this.hideLoading()

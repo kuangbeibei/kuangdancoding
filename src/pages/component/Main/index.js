@@ -13,7 +13,8 @@ export default function (props) {
     const {
         Component,
         scrollTop,
-        match
+        match,
+        history
     } = props;
 
     // console.log('我在main里面拿到的scrollTop ,', scrollTop);
@@ -44,7 +45,10 @@ export default function (props) {
             >
                 <div className="wrap">
                     <div className="content">
-                        <Component match = {match} />
+                        <Component 
+                            match = {match}
+                            history = {history}
+                        />
                     </div>
                 </div>
             </div>
