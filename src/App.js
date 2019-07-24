@@ -5,7 +5,8 @@ import Loading from "component/Loading"
 import Header from "component/Header"
 import Main from "component/Main"
 import Sidemenu from "component/Sidemenu"
-import NoMatch from "component/NoMatch"
+import Footer from "component/Footer"
+import NoMatch from "component/NoMatch" 
 
 import About from "pages/About"
 import Blog from "pages/Blog"
@@ -156,6 +157,7 @@ class App extends React.Component {
                 <Router>
 
                     <div className={`wrap-container ${sideMenuActive ? "side-move-show-menu" : ""}`}>
+
                         <Header 
                             {...this.state} 
                             showSideMenu = {this.showSideMenu.bind(this)}
@@ -212,6 +214,7 @@ class App extends React.Component {
                             
                         </Switch>
 
+                        <Footer />
                         
                     </div>
 

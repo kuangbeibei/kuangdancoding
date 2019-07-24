@@ -17,10 +17,7 @@ export default function ({match, history}) {
     } = match.params;
 
     const [content, getContent] = useState("");
-
     const [count, setCount] = useState(3);
-
-    console.log('history ,', history);
 
     try {
         const contentPath = require(`markdwon/${date}/${title}.md`) // 这样拿到的是路径，不行
