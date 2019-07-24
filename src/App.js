@@ -32,7 +32,8 @@ class App extends React.Component {
         sideMenuActive: false,
         loadingVisible: true,
         loadingActive: true,
-        y: 0
+        y: 0,
+        rootEle: document.getElementById('root')
     }
 
     componentDidMount () {
@@ -74,7 +75,7 @@ class App extends React.Component {
 
                 if (scrollTop >= 0 && scrollTop < 400) {
                     this.setState({
-                        y: (scrollTop/4).toFixed(2)
+                        y: (scrollTop/6).toFixed(2)
                     })
                 }
             })
@@ -93,7 +94,7 @@ class App extends React.Component {
                 this.setState({
                     sideMenuActive: true
                 })
-                document.body.className = "overflow-hidden"
+                this.forbidTouchMove()
             }, 100)
         })
     }
@@ -106,9 +107,23 @@ class App extends React.Component {
                 this.setState({
                     sideMenuVisible: false
                 })
-                document.body.className = ""
+                this.allowTouchMove();
             }, 100)
         })
+    }
+
+    forbidTouchMove = () => {
+        this.state.rootEle.addEventListener('touchmove', event => { 
+            event.preventDefault(); 
+            document.body.className = "overflow-hidden";
+        }, false) 
+    }
+
+    allowTouchMove = () => {
+        document.body.removeEventListener('touchmove', event => { 
+            event.preventDefault(); 
+            document.body.className = "";
+        }, false) 
     }
 
     toggleSideMenu = () => {
@@ -166,17 +181,18 @@ class App extends React.Component {
 
         return (
             <>
-                <div className={`wrap-container ${sideMenuActive ? "side-move-show-menu" : ""}`}>
+                <Router>
 
-                    {/* 滚动下移的背景图 */}
-                    <div className="bg" style = {{transform: "translate(0, " + y +"px)"}}></div>
+                    <Header 
+                        {...this.state}
+                        showSideMenu = {this.showSideMenu.bind(this)}
+                        sideMenuActive = {sideMenuActive}
+                    />
 
-                    <Router>
+                    <div className={`wrap-container ${sideMenuActive ? "side-move-show-menu" : ""}`}>
 
-                        <Header 
-                            {...this.state}
-                            showSideMenu = {this.showSideMenu.bind(this)}
-                        />
+                        {/* 滚动下移的背景图 */}
+                        <div className="bg" style = {{transform: "translate(0, " + y +"px)"}}></div>
 
                         <Switch>
 
@@ -227,14 +243,16 @@ class App extends React.Component {
 
                         <Footer />
 
-                        {/* 侧边栏 */}
-                        {
-                            this.toggleSideMenu()
-                        }
+                     </div>
 
-                    </Router>
+                    {/* 侧边栏 */}
+                    {
+                        this.toggleSideMenu()
+                    }
 
-                </div>
+                </Router>
+
+                
 
                 {/* loading */}
                 {

@@ -6,7 +6,8 @@ export default function (props) {
     const {
         windowWidth,
         scrollTop,
-        showSideMenu
+        showSideMenu,
+        sideMenuActive
     } = props;
 
     const headerBackground = () => {
@@ -44,7 +45,7 @@ export default function (props) {
     return (
         <header
             style = {headerBackground()}
-            className = {`header-wrap ${scrollTop > 60 ? "scrollChange" : ''}`}
+            className = {`header-wrap ${scrollTop > 60 ? "scrollChange" : ''} ${sideMenuActive ? "side-move-show-menu" : ""}`}
         >
             <div 
                 className="header"
