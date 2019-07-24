@@ -7,12 +7,12 @@ import React, {} from "react"
 import "./Main.scss"
 
 
-let y;
+// let y;
 
 export default function (props) {
     const {
         Component,
-        scrollTop,
+        // scrollTop,
         match,
         history
     } = props;
@@ -29,18 +29,17 @@ export default function (props) {
     //     }
     // }
 
-    requestAnimationFrame(() => {
-        if (scrollTop > 0 && scrollTop <= 400) {
-            y = parseInt(scrollTop/4);
-        }
-    })
-
+    // requestAnimationFrame(() => {
+    //     if (scrollTop > 0 && scrollTop <= 400) {
+    //         y = parseInt(scrollTop/4);
+    //     }
+    // })
 
     return (
         <main>
             <div 
                 className="main-container"
-                style = {{transform: "translate(0, -" + y +"px)"}}
+                // style = {{transform: "translate(0, -" + y +"px)"}}
                 // style = {mainTranslateY()}
             >
                 <div className="wrap">

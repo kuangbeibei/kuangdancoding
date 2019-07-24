@@ -32,6 +32,7 @@ class App extends React.Component {
         sideMenuActive: false,
         loadingVisible: true,
         loadingActive: true,
+        y: 0
     }
 
     componentDidMount () {
@@ -66,6 +67,16 @@ class App extends React.Component {
         requestAnimationFrame(() => {
             this.setState({
                 scrollTop: window.scrollY
+            }, () => {
+                const {
+                    scrollTop
+                } = this.state;
+
+                if (scrollTop >= 0 && scrollTop < 400) {
+                    this.setState({
+                        y: parseInt(scrollTop/4)
+                    })
+                }
             })
         })
         // scrollTimer = setTimeout(() => {
@@ -149,17 +160,21 @@ class App extends React.Component {
     render () {
         const {
             sideMenuActive,
-            scrollTop,
+            // scrollTop,
+            y
         } = this.state;
 
         return (
             <>
-                <Router>
+                <div className={`wrap-container ${sideMenuActive ? "side-move-show-menu" : ""}`}>
 
-                    <div className={`wrap-container ${sideMenuActive ? "side-move-show-menu" : ""}`}>
+                    {/* 滚动下移的背景图 */}
+                    <div className="bg" style = {{transform: "translate(0, " + y +"px)"}}></div>
+
+                    <Router>
 
                         <Header 
-                            {...this.state} 
+                            {...this.state}
                             showSideMenu = {this.showSideMenu.bind(this)}
                         />
 
@@ -168,8 +183,7 @@ class App extends React.Component {
                             <Route exact path="/" component={() => {
                                 return (
                                     <Main 
-                                        Component = {Home} 
-                                        scrollTop = {scrollTop}
+                                        Component = {Home}
                                     />
                                 )
                             }}/>
@@ -177,8 +191,7 @@ class App extends React.Component {
                             <Route path="/about" component={() => {
                                 return (
                                     <Main 
-                                        Component = {About} 
-                                        scrollTop = {scrollTop}
+                                        Component = {About}
                                     />
                                 )
                             }}/>
@@ -186,8 +199,7 @@ class App extends React.Component {
                             <Route path="/blog" component={() => {
                                 return (
                                     <Main
-                                        Component = {Blog} 
-                                        scrollTop = {scrollTop}
+                                        Component = {Blog}
                                     />
                                 )
                             }}/>
@@ -196,7 +208,6 @@ class App extends React.Component {
                                 return (
                                     <Main 
                                         Component = {Articles}
-                                        scrollTop = {scrollTop}
                                         match = {match}
                                         history = {history}
                                     />
@@ -215,16 +226,16 @@ class App extends React.Component {
                         </Switch>
 
                         <Footer />
-                        
-                    </div>
 
-                    {/* 侧边栏 */}
-                    {
-                        this.toggleSideMenu()
-                    }
-                </Router>
+                        {/* 侧边栏 */}
+                        {
+                            this.toggleSideMenu()
+                        }
 
-                
+                    </Router>
+
+                </div>
+
                 {/* loading */}
                 {
                     this.hideLoading()
