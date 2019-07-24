@@ -40,7 +40,7 @@ class App extends React.Component {
         // 这个生命周期只有一次
         window.addEventListener("resize", this.onWindowResize);
         window.addEventListener('scroll', this.onWindowScroll);
-        window.addEventListener('load', this.onWindowLoad)
+        window.addEventListener('load', this.onWindowLoad);
     }
 
     componentWillUnmount () {
@@ -94,12 +94,14 @@ class App extends React.Component {
                 this.setState({
                     sideMenuActive: true
                 })
-                this.forbidTouchMove()
+                // window.addEventListener('touchmove', this.forbidTouchMove, true) 
             }, 100)
         })
     }
 
     hideSideMenu = () => {
+        // window.removeEventListener('touchmove', this.forbidTouchMove, true) 
+
         this.setState({
             sideMenuActive: false,
         }, () => {
@@ -107,24 +109,25 @@ class App extends React.Component {
                 this.setState({
                     sideMenuVisible: false
                 })
-                this.allowTouchMove();
             }, 100)
         })
     }
 
-    forbidTouchMove = () => {
-        this.state.rootEle.addEventListener('touchmove', event => { 
-            event.preventDefault(); 
-            document.body.className = "overflow-hidden";
-        }, false) 
-    }
+    // forbidTouchMove = (event) => {
+    //     console.log(123);
+    //     event.preventDefault(); 
+    //     document.body.classList.add("overflow-hidden");
+        
+    // }
 
-    allowTouchMove = () => {
-        document.body.removeEventListener('touchmove', event => { 
-            event.preventDefault(); 
-            document.body.className = "";
-        }, false) 
-    }
+    // allowTouchMove = () => {
+    //     this.state.rootEle.addEventListener('touchmove', event => { 
+    //         console.log(456);
+    //         event.preventDefault(); 
+    //         document.classList.remove("overflow-hidden")
+    //     }, false) 
+    // }
+
 
     toggleSideMenu = () => {
         const {
@@ -251,8 +254,6 @@ class App extends React.Component {
                     }
 
                 </Router>
-
-                
 
                 {/* loading */}
                 {

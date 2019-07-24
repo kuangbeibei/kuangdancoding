@@ -1,14 +1,20 @@
 import React from "react"
-import {NavLink} from "react-router-dom"
+import {withRouter} from "react-router-dom"
 
 import "./Side-menu.scss"
 
-export default function (props) {
+export default withRouter(function (props) {
 
     const {
         sideMenuActive,
-        hideSideMenu
+        hideSideMenu,
+        history
     } = props;
+
+    const clickLinkTo = (path) => {
+        history.push(path);
+        hideSideMenu();
+    }
 
     return (
         <>
@@ -40,18 +46,24 @@ export default function (props) {
                             </div>
                         </li>
                         <li>
-                            <div className="menu-item">
-                                <NavLink to="/" exact>Home</NavLink>
+                            <div className="menu-item" onClick = {() => {
+                                clickLinkTo('/')
+                            }}>
+                                Home
                             </div>
                         </li>
                         <li>
-                            <div className="menu-item">
-                                <NavLink to="/articles">Articles</NavLink>
+                            <div className="menu-item" onClick = {() => {
+                                clickLinkTo('/articles')
+                            }}>
+                                Articles
                             </div>
                         </li>
                         <li>
-                            <div className="menu-item">
-                                <NavLink to="/about">About Me</NavLink>
+                            <div className="menu-item" onClick = {() => {
+                                clickLinkTo('/about')
+                            }}>
+                                About Me
                             </div>
                         </li>
                     </ul>
@@ -59,4 +71,4 @@ export default function (props) {
             </div>
         </>
     )
-}
+})
