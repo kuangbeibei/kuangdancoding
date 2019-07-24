@@ -74,7 +74,7 @@ class App extends React.Component {
 
                 if (scrollTop >= 0 && scrollTop < 400) {
                     this.setState({
-                        y: parseInt(scrollTop/4)
+                        y: (scrollTop/4).toFixed(2)
                     })
                 }
             })

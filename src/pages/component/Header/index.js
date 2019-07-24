@@ -44,7 +44,7 @@ export default function (props) {
     return (
         <header
             style = {headerBackground()}
-            className = {`hader-wrap ${scrollTop > 60 ? "scrollChange" : ''}`}
+            className = {`header-wrap ${scrollTop > 60 ? "scrollChange" : ''}`}
         >
             <div 
                 className="header"

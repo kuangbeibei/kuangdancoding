@@ -1,4 +1,4 @@
-.hader-wrap {
+.header-wrap {
     position: fixed;
     top: 0;
     z-index: 1100;
@@ -47,7 +47,7 @@
         }
     }
 }
-.hader-wrap.scrollChange {
+.header-wrap.scrollChange {
     .header {
         .info {
             a {
@@ -71,7 +71,7 @@
 }
 
 @media (max-width: 959.95px) {
-    .hader-wrap {
+    .header-wrap {
         .header {
             ul {
                 display: none;
@@ -101,7 +101,7 @@
 }
 
 @media (min-width: 576px) {
-    .hader-wrap {
+    .header-wrap {
         .header {
             max-width: 540px;
         }
@@ -109,7 +109,7 @@
 }
 
 @media (min-width: 768px) {
-    .hader-wrap {
+    .header-wrap {
         .header {
             max-width: 720px;
         }
@@ -117,7 +117,7 @@
 }
 
 @media (min-width: 992px) {
-    .hader-wrap {
+    .header-wrap {
         .header {
             max-width: 960px;
         }
@@ -125,7 +125,7 @@
 }
 
 @media (min-width: 1200px) {
-    .hader-wrap {
+    .header-wrap {
         .header {
             max-width: 1140px;
         }
