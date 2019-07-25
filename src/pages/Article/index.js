@@ -39,7 +39,10 @@ export default function ({match, history}) {
         return (
             <div className="article-wrap">
                 <section className="article-section">
-                    <ReactMarkdown source = {content || record[title]} />
+                    <ReactMarkdown 
+                        source = {content || record[title]} 
+                        escapeHtml={false}
+                    />
                 </section>
             </div>
         );

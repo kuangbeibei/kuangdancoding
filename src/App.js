@@ -192,10 +192,10 @@ class App extends React.Component {
                         sideMenuActive = {sideMenuActive}
                     />
 
-                    <div className={`wrap-container ${sideMenuActive ? "side-move-show-menu" : ""}`}>
+                    {/* 滚动下移的背景图 */}
+                    <div className="bg" style = {{transform: "translate(0, " + y +"px)"}}></div>
 
-                        {/* 滚动下移的背景图 */}
-                        <div className="bg" style = {{transform: "translate(0, " + y +"px)"}}></div>
+                    <div className={`wrap-container ${sideMenuActive ? "side-move-show-menu" : ""}`}>
 
                         <Switch>
 
@@ -243,10 +243,9 @@ class App extends React.Component {
                             }} />
                             
                         </Switch>
+                    </div>
 
-                        <Footer />
-
-                     </div>
+                    <Footer />
 
                     {/* 侧边栏 */}
                     {
