@@ -1,4 +1,6 @@
-import React from "react";
+import React, {
+    useState,
+} from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Loading from "component/Loading"
@@ -13,255 +15,139 @@ import Blog from "pages/Blog"
 import Home from "pages/Home"
 import Articles from "pages/Articles"
 
+import {
+    useWindowWidth,
+    useWindowScroll,
+    useWindowOnload
+} from "hooks"
+
 import "style/font.css"
 import "style/reset.css"
 import "style/global.scss"
 
 
-// let resizeTimer;
-// let scrollTimer;
+export default function App() {
+    const windowWidth = useWindowWidth();
+    const scrollTop = useWindowScroll();
+    const loadingVisible = useWindowOnload();
 
-// let count = 0;
+    const [sideMenuVisible, setSideMenuVisible] = useState(false);
+    const [sideMenuActive, setSideMenuActive] = useState(false)
 
-class App extends React.Component {
-
-    state = {
-        windowWidth: window.innerWidth,
-        scrollTop: 0,
-        sideMenuVisible: false,
-        sideMenuActive: false,
-        loadingVisible: true,
-        loadingActive: true,
-        y: 0,
-        rootEle: document.getElementById('root')
+    
+    const showSideMenu = async () => {
+        await setSideMenuVisible(true);
+        await setTimeout(() => {
+            setSideMenuActive(true)
+        }, 100)
     }
 
-    componentDidMount () {
-        // 这个生命周期只有一次
-        window.addEventListener("resize", this.onWindowResize);
-        window.addEventListener('scroll', this.onWindowScroll);
-        window.addEventListener('load', this.onWindowLoad);
+    const hideSideMenu = async () => {
+        await setSideMenuActive(false);
+        await setTimeout(() => {
+            setSideMenuVisible(false)
+        }, 100)
     }
 
-    componentWillUnmount () {
-        window.removeEventListener("resize", this.onWindowResize);
-        window.removeEventListener('scroll', this.onWindowScroll);
-        window.removeEventListener('load', this.onWindowLoad);
-    }
-
-    onWindowResize = () => {
-        // clearTimeout(resizeTimer);
-        // resizeTimer = setTimeout(() => {
-        //     this.setState({
-        //         windowWidth: window.innerWidth
-        //     })
-        // }, 100)
-        requestAnimationFrame(() => {
-            this.setState({
-                windowWidth: window.innerWidth
-            })
-        })
-    }
-
-    onWindowScroll = () => {
-        // clearTimeout(scrollTimer);
-        requestAnimationFrame(() => {
-            this.setState({
-                scrollTop: window.scrollY
-            }, () => {
-                const {
-                    scrollTop
-                } = this.state;
-
-                if (scrollTop >= 0 && scrollTop < 400) {
-                    this.setState({
-                        y: (scrollTop/6).toFixed(2)
-                    })
-                }
-            })
-        })
-        // scrollTimer = setTimeout(() => {
-            
-        // }, 10)
-    }
-
-
-    showSideMenu = () => {
-        this.setState({
-            sideMenuVisible: true
-        }, () => {
-            setTimeout(() => {
-                this.setState({
-                    sideMenuActive: true
-                })
-                // window.addEventListener('touchmove', this.forbidTouchMove, true) 
-            }, 100)
-        })
-    }
-
-    hideSideMenu = () => {
-        // window.removeEventListener('touchmove', this.forbidTouchMove, true) 
-
-        this.setState({
-            sideMenuActive: false,
-        }, () => {
-            setTimeout(() => {
-                this.setState({
-                    sideMenuVisible: false
-                })
-            }, 100)
-        })
-    }
-
-    // forbidTouchMove = (event) => {
-    //     console.log(123);
-    //     event.preventDefault(); 
-    //     document.body.classList.add("overflow-hidden");
-        
-    // }
-
-    // allowTouchMove = () => {
-    //     this.state.rootEle.addEventListener('touchmove', event => { 
-    //         console.log(456);
-    //         event.preventDefault(); 
-    //         document.classList.remove("overflow-hidden")
-    //     }, false) 
-    // }
-
-
-    toggleSideMenu = () => {
-        const {
-            sideMenuVisible,
-            sideMenuActive
-        } = this.state;
-
+    const toggleSideMenu = () => {
         if (sideMenuVisible) {
             return (
                 <Sidemenu 
                     sideMenuActive = {sideMenuActive} 
-                    hideSideMenu = {this.hideSideMenu.bind(this)}
+                    hideSideMenu = {hideSideMenu}
                 />
             ) 
         } else return null
     }
 
-    onWindowLoad = () => {
-        setTimeout(() => {
-            this.setState({
-                loadingActive: false
-            }, () => {
-                setTimeout(() => {
-                    this.setState({
-                        loadingVisible: false
-                    })
-                }, 1000)
-            })
-        }, 500)
-    }
-
-    hideLoading = () => {
-        const {
-            loadingActive,
-            loadingVisible
-        } = this.state;
-
+    const toggleLoading = () => {
         if (loadingVisible) {
             return (
                 <Loading 
-                    loadingActive = {loadingActive}
+                    loadingActive = {true}
                 />
             )
         } else return null
     }
 
+    return (
+        <>
+            <Router>
 
-    render () {
-        const {
-            sideMenuActive,
-            // scrollTop,
-            y
-        } = this.state;
+                <Header 
+                    windowWidth = {windowWidth}
+                    scrollTop = {scrollTop}
+                    showSideMenu = {showSideMenu}
+                    sideMenuActive = {sideMenuActive}
+                />
 
-        return (
-            <>
-                <Router>
+                {/* 滚动下移的背景图 */}
+                <div className="bg" style = {{transform: "translate(0, " + scrollTop +"px)"}}></div>
 
-                    <Header 
-                        {...this.state}
-                        showSideMenu = {this.showSideMenu.bind(this)}
-                        sideMenuActive = {sideMenuActive}
-                    />
+                <div className={`wrap-container ${sideMenuActive ? "side-move-show-menu" : ""}`}>
 
-                    {/* 滚动下移的背景图 */}
-                    <div className="bg" style = {{transform: "translate(0, " + y +"px)"}}></div>
+                    <Switch>
 
-                    <div className={`wrap-container ${sideMenuActive ? "side-move-show-menu" : ""}`}>
+                        <Route exact path="/" component={() => {
+                            return (
+                                <Main 
+                                    Component = {Home}
+                                />
+                            )
+                        }}/>
 
-                        <Switch>
+                        <Route path="/about" component={() => {
+                            return (
+                                <Main 
+                                    Component = {About}
+                                />
+                            )
+                        }}/>
 
-                            <Route exact path="/" component={() => {
-                                return (
-                                    <Main 
-                                        Component = {Home}
-                                    />
-                                )
-                            }}/>
+                        <Route path="/blog" component={() => {
+                            return (
+                                <Main
+                                    Component = {Blog}
+                                />
+                            )
+                        }}/>
 
-                            <Route path="/about" component={() => {
-                                return (
-                                    <Main 
-                                        Component = {About}
-                                    />
-                                )
-                            }}/>
+                        <Route path="/articles" component={({match, history}) => {
+                            return (
+                                <Main 
+                                    Component = {Articles}
+                                    match = {match}
+                                    history = {history}
+                                />
+                            )
+                        }} />
 
-                            <Route path="/blog" component={() => {
-                                return (
-                                    <Main
-                                        Component = {Blog}
-                                    />
-                                )
-                            }}/>
+                        <Route component={({history}) => {
+                            return (
+                                <Main 
+                                    Component = {NoMatch}
+                                    history = {history}
+                                />
+                            )
+                        }} />
+                        
+                    </Switch>
+                </div>
 
-                            <Route path="/articles" component={({match, history}) => {
-                                return (
-                                    <Main 
-                                        Component = {Articles}
-                                        match = {match}
-                                        history = {history}
-                                    />
-                                )
-                            }} />
+                <Footer />
 
-                            <Route component={({history}) => {
-                                return (
-                                    <Main 
-                                        Component = {NoMatch}
-                                        history = {history}
-                                    />
-                                )
-                            }} />
-                            
-                        </Switch>
-                    </div>
-
-                    <Footer />
-
-                    {/* 侧边栏 */}
-                    {
-                        this.toggleSideMenu()
-                    }
-
-                </Router>
-
-                {/* loading */}
+                {/* 侧边栏 */}
                 {
-                    this.hideLoading()
+                    toggleSideMenu()
                 }
-                
-            </>
-        )
-    }
-}
 
-export default App
+            </Router>
+
+            {/* loading */}
+            {
+                toggleLoading()
+            }
+            
+        </>
+    )
+}

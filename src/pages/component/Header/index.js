@@ -26,7 +26,7 @@ export default function (props) {
                     <button 
                         onClick={() => {
                             showSideMenu()
-                        }} 
+                        }}
                         className="svg-btn" 
                         style = {{background: 'transparent', border: '0 none'}}
                     >
@@ -37,15 +37,13 @@ export default function (props) {
                     </button>
                 </React.Fragment>
             )
-        } else {
-            return null
-        }
+        } else return null
     }
 
     return (
         <header
             style = {headerBackground()}
-            className = {`header-wrap ${scrollTop > 60 ? "scrollChange" : ''} ${sideMenuActive ? "side-move-show-menu" : ""}`}
+            className = {`header-wrap ${scrollTop > 46 ? "scrollChange" : ''} ${sideMenuActive ? "side-move-show-menu" : ""}`}
         >
             <div 
                 className="header"
