@@ -12,42 +12,42 @@ function useInterval(callback, delay) {
   
     // Remember the latest callback.
     useEffect(() => {
-      savedCallback.current = callback;
+      	savedCallback.current = callback;
     }, [callback]);
   
     // Set up the interval.
     useEffect(() => {
-      function tick() {
-        savedCallback.current();
-      }
-      if (delay !== null) {
-        let id = setInterval(tick, delay);
-        return () => clearInterval(id);
-      }
+      	function tick() {
+        	savedCallback.current();
+      	}
+      	if (delay !== null) {
+        	let id = setInterval(tick, delay);
+        	return () => clearInterval(id);
+      	}
     }, [delay]);
 }
 
 function useWindowWidth () {
-  const [
-      windowWidth,
-      setWindowWidth
-  ] = useState(window.innerWidth);
+  	const [
+      	windowWidth,
+      	setWindowWidth
+  	] = useState(window.innerWidth);
 
-  useEffect(() => {
-      const handleResize = () => {
-          requestAnimationFrame(() => {
-              setWindowWidth(window.innerWidth);
-          })
-      }
+  	useEffect(() => {
+      	const handleResize = () => {
+          	requestAnimationFrame(() => {
+              	setWindowWidth(window.innerWidth);
+          	})
+      	}
   
-      window.addEventListener("resize", handleResize);
+      	window.addEventListener("resize", handleResize);
   
-      return () => {
-          window.removeEventListener("resize", handleResize);
-      };
-  })
+      	return () => {
+          	window.removeEventListener("resize", handleResize);
+      	};
+  	})
 
-  return windowWidth
+  	return windowWidth
 }
 
 function useWindowScroll () {

@@ -1,4 +1,4 @@
-## position: fixed 失效了??? 😢
+## position: fixed 失效了??? 🤣
 ---
 
 Blog中几个*position: fixed*的地方：
