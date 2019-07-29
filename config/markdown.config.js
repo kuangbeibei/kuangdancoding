@@ -53,7 +53,7 @@ readAllFile(path.resolve('src/markdown')).then(res => {
     res.forEach(item => {
         const d = (Object.keys(item))[0];
         const title = item[d].title.slice(0, -3);
-        markdownContent += `[${title}](http://www.kuangdancoding.com/articles/${d}/${title})
+        markdownContent += `[${title}](http://www.kuangdancoding.com/articles/${d}/${encodeURIComponent(title)})
         \r` 
     })
 
