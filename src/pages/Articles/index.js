@@ -23,7 +23,7 @@ export default function ({match, history}) {
                                     ArticleList.map((article, idx) => {
                                         const d = (Object.keys(article))[0];
                                         const title = article[d].title.slice(0, -3);
-                                        return <li key = {idx}><Link to={`${match.path}/${d}/${title}`}>{title}</Link></li>
+                                        return <li key = {idx}><Link to={`${match.path}/${d}/${encodeURIComponent(title)}`}>{title}</Link></li>
                                     })
                                 }
                             </ul>
@@ -35,9 +35,6 @@ export default function ({match, history}) {
                     path = {`${match.path}/:date/:title`}
                     component={Article}
                     history = {history}
-                    // render = {() => {
-                    //     return <Article match = {match} />
-                    // }}
                 />
             </Switch>
         </>

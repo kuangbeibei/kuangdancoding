@@ -20,7 +20,7 @@ export default function ({match, history}) {
     const [count, setCount] = useState(3);
 
     try {
-        const contentPath = require(`markdwon/${date}/${title}.md`) // 这样拿到的是路径，不行
+        const contentPath = require(`markdwon/${date}/${decodeURIComponent(title)}.md`) // 这样拿到的是路径，不行
 
         if (!record[title]) {
             console.log('第一次')

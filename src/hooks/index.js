@@ -7,24 +7,25 @@ import {
  * 这里面存放自定义hook
  */
 
-function useInterval(callback, delay) {
-    const savedCallback = useRef();
+function useInterval() {
+    // const savedCallback = useRef();
   
     // Remember the latest callback.
-    useEffect(() => {
-      	savedCallback.current = callback;
-    }, [callback]);
+    // useEffect(() => {
+    //   	savedCallback.current = callback;
+	// }, [callback]);
+	const [count, setCount] = useState(5);
   
     // Set up the interval.
     useEffect(() => {
       	function tick() {
-        	savedCallback.current();
+        	setCount(count => count - 1);
       	}
-      	if (delay !== null) {
-        	let id = setInterval(tick, delay);
-        	return () => clearInterval(id);
-      	}
-    }, [delay]);
+      	let id = setInterval(tick, 1000);
+        return () => clearInterval(id);
+	}, []);
+	
+	return count
 }
 
 function useWindowWidth () {
@@ -45,7 +46,7 @@ function useWindowWidth () {
       	return () => {
           	window.removeEventListener("resize", handleResize);
       	};
-  	})
+  	}, [])
 
   	return windowWidth
 }
@@ -65,7 +66,7 @@ function useWindowScroll () {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         }
-	})
+	}, [])
 	
 	return (y/6).toFixed(2)
 }
@@ -85,7 +86,7 @@ function useWindowOnload () {
 		return () => {
 			window.removeEventListener('load', handleLoading);
 		}
-	})
+	}, [])
 
 	return loading
 }

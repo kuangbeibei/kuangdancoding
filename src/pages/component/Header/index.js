@@ -2,17 +2,23 @@ import React from 'react'
 import { NavLink } from "react-router-dom";
 import "./Header.scss"
 
+import {
+    useWindowWidth,
+    useWindowScroll,
+} from "hooks"
+
 export default function (props) {
     const {
-        windowWidth,
-        scrollTop,
         showSideMenu,
         sideMenuActive
     } = props;
 
+    const scrollTop = useWindowScroll();
+    const windowWidth = useWindowWidth();
+
     const headerBackground = () => {
         if (scrollTop > 0) {
-            const opacity = Number(scrollTop/150)
+            const opacity = Number(scrollTop/60)
             return {
                 background: `rgba(255, 255, 255, ${opacity})`
             }

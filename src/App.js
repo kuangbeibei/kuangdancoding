@@ -4,6 +4,7 @@ import React, {
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Loading from "component/Loading"
+import Background from "component/Background"
 import Header from "component/Header"
 import Main from "component/Main"
 import Sidemenu from "component/Sidemenu"
@@ -16,8 +17,6 @@ import Home from "pages/Home"
 import Articles from "pages/Articles"
 
 import {
-    useWindowWidth,
-    useWindowScroll,
     useWindowOnload
 } from "hooks"
 
@@ -27,8 +26,6 @@ import "style/global.scss"
 
 
 export default function App() {
-    const windowWidth = useWindowWidth();
-    const scrollTop = useWindowScroll();
     const loadingVisible = useWindowOnload();
 
     const [sideMenuVisible, setSideMenuVisible] = useState(false);
@@ -74,23 +71,22 @@ export default function App() {
         <>
             <Router>
 
-                <Header 
-                    windowWidth = {windowWidth}
-                    scrollTop = {scrollTop}
+                <Header
                     showSideMenu = {showSideMenu}
                     sideMenuActive = {sideMenuActive}
                 />
 
                 {/* 滚动下移的背景图 */}
-                <div className="bg" style = {{transform: "translate(0, " + scrollTop +"px)"}}></div>
-
+                <Background />
+                
+                {/* 主体 */}
                 <div className={`wrap-container ${sideMenuActive ? "side-move-show-menu" : ""}`}>
 
                     <Switch>
 
                         <Route exact path="/" component={() => {
                             return (
-                                <Main 
+                                <Main
                                     Component = {Home}
                                 />
                             )
@@ -98,7 +94,7 @@ export default function App() {
 
                         <Route path="/about" component={() => {
                             return (
-                                <Main 
+                                <Main
                                     Component = {About}
                                 />
                             )
