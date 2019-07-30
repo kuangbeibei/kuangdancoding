@@ -1,31 +1,68 @@
 import {
     useState,
     useEffect,
-    useRef
+	useRef,
+	useLayoutEffect
 } from "react"
 /**
  * 这里面存放自定义hook
  */
 
-function useInterval() {
-    // const savedCallback = useRef();
+ // index.js:1375 Warning: Cannot update during an existing state transition (such as within `render`). Render methods should be a pure function of props and state.
+// function useInterval(initialCount) {
+//     const savedCallback = useRef();
   
-    // Remember the latest callback.
-    // useEffect(() => {
-    //   	savedCallback.current = callback;
-	// }, [callback]);
-	const [count, setCount] = useState(5);
+//     // Remember the latest callback.
+ 
+
+// 	const [count, setCount] = useState(initialCount);
+
+// 	console.log('count ---> 4,', count);
+
+// 	function tick() {
+// 		setCount(count => count - 1);
+// 		console.log('count ---> 2,', count);
+// 	}
+
+// 	useEffect(() => {
+// 		savedCallback.current = tick;
+//   	}, [tick]);
   
-    // Set up the interval.
-    useEffect(() => {
-      	function tick() {
-        	setCount(count => count - 1);
-      	}
-      	let id = setInterval(tick, 1000);
-        return () => clearInterval(id);
-	}, []);
+//     // Set up the interval.
+//     useEffect(() => {
+// 		let id = setInterval(tick, 5000);
+// 		console.log('count ---> 3,', count);
+
+// 		console.log('---------------------------------------------------')
+//         return () => {
+// 			clearInterval(id);
+// 			id = null;
+// 		};
+// 	});
+
+// 	console.log('count ---> 0,', count);
 	
-	return count
+// 	return count
+// }
+
+function useInterval(callback, delay) {
+	const savedCallback = useRef();
+  
+	// Remember the latest callback.
+	useEffect(() => {
+	  	savedCallback.current = callback;
+	}, [callback]);
+  
+	// Set up the interval.
+	useEffect(() => {
+	  	function tick() {
+			savedCallback.current();
+	  	}
+	  	if (delay !== null) {
+			let id = setInterval(tick, delay);
+			return () => clearInterval(id);
+	  	}
+	}, [delay]);
 }
 
 function useWindowWidth () {
