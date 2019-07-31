@@ -17,7 +17,8 @@ export default function ({match, history}) {
     } = match.params;
 
     const [content, getContent] = useState("");
-    const [count, setCount] = useState(3);
+
+    const [count, setCount] = useState(5);
 
     try {
         const contentPath = require(`markdwon/${date}/${decodeURIComponent(title)}.md`) // 这样拿到的是路径，不行
@@ -50,21 +51,23 @@ export default function ({match, history}) {
     } catch (e) {
 
         return (
-            <div className="article-wrap">
-                <section className="article-section">
-                    <p>Attention: 这篇文章不存在!</p>
-                    <p>{`倒计时`}  <span style={{color: 'rgba(34, 37, 207, 1)'}}>{`${count}s`}</span>  {`转至Blog主页...`}</p>
-                    {
-                        useInterval(() => {
-                            if (count <= 1) {
-                                history.replace("/")
-                            } else {
-                                setCount(count - 1);
-                            }
-                        }, 1000)
-                    }
-                </section>
-            </div>
+            <>
+                <div className="article-wrap">
+                    <section className="article-section">
+                        <p>{`Attention: 这篇文章不存在哦!`}</p>
+                        <p>{`倒计时`}  <span style={{color: 'rgba(34, 37, 207, 1)'}}>{`${count}s`}</span>  {`转至Blog主页...`}</p>
+                    </section>
+                </div>
+                {
+                    useInterval(() => {
+                        if (count <= 1) {
+                            history.replace("/")
+                        } else {
+                            setCount(count -1);
+                        }
+                    }, 1000)
+                }
+            </>
         )
     }
 }

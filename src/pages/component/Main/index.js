@@ -2,7 +2,7 @@
  * 渲染主体结构通用模板
  */
 
-import React, {} from "react"
+import React from "react"
 
 import "./Main.scss"
 
