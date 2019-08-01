@@ -1,0 +1,82 @@
+.article-section, .blog-section {
+    text-align: left;
+    color: #444;
+    font-weight: normal;
+    ol, ul {
+        display: block;
+        list-style-type: disc;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        padding-inline-start: 40px;
+        list-style: disc;
+        font-size: 14px;
+    }
+    pre {
+        overflow: auto;
+        border: 1px solid #ccc;
+        display: block;
+        white-space: pre;
+        margin: 1em 0px;
+    }
+    code, pre, kdb, samp {
+        font-family: monospace,monospace;
+        font-size: 1em;
+    }
+    code {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #333;
+        background: #f8f8f8;
+    }
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        thead {
+            display: table-header-group;
+            vertical-align: middle;
+            border-color: inherit;
+        }
+        tbody {
+            display: table-row-group;
+            vertical-align: middle;
+            border-color: inherit;
+        }
+        tr {
+            border-top: 1px solid #c6cbd1;
+            background: #fff;
+            &:nth-child(2n) {
+                background: #f6f8fa;
+            }
+        }
+        th, td {
+            padding: 6px 13px;
+            border: 1px solid #dfe2e5;
+        }
+    }
+    blockquote {
+        color: #666;
+        margin: 0;
+        padding-left: 3em;
+        border-left: 0.5em #eee solid;
+    }
+    h2 {
+        margin-bottom: 60px;
+        font-family: "Roboto Slab", "Times New Roman", serif;
+        font-size: 25px;
+        line-height: 1.5em;
+    }
+    h4 {
+        margin-bottom: 1.5em;
+    }
+    p {
+        line-height: 2em;
+        font-size: 14px;
+    }
+    ol {
+        display: inline-block;
+        line-height: 2em;
+    }
+}

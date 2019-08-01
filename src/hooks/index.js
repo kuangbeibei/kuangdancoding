@@ -2,7 +2,6 @@ import {
     useState,
     useEffect,
 	useRef,
-	useLayoutEffect
 } from "react"
 /**
  * 这里面存放自定义hook
@@ -49,7 +48,7 @@ function useInterval(callback, delay) { //Dan Abramov 的版本
 // 	return count;
 // }
 
-// function useSetInterval(callback, delay) { // 这个问题在与不efficient，因为callback每次都会变化
+// function useSetInterval(callback, delay) { // 这个问题在于不efficient，因为callback每次都会变化
 // 	useEffect(() => {
 // 		const timerId = setInterval(() => {
 // 			callback()
@@ -73,9 +72,7 @@ function useWindowWidth () {
 		  
       	window.addEventListener("resize", handleResize);
   
-      	return () => {
-          	window.removeEventListener("resize", handleResize);
-      	};
+      	return () => window.removeEventListener("resize", handleResize);
   	}, [])
 
   	return windowWidth
@@ -93,9 +90,7 @@ function useWindowScroll () {
 
         window.addEventListener('scroll', handleScroll);
 
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        }
+        return () => window.removeEventListener('scroll', handleScroll);
 	}, [])
 	
 	return (y/6).toFixed(2)
@@ -113,9 +108,7 @@ function useWindowOnload () {
 
 		window.addEventListener('load', handleLoading);
 
-		return () => {
-			window.removeEventListener('load', handleLoading);
-		}
+		return () => window.removeEventListener('load', handleLoading);
 	}, [])
 
 	return loading
