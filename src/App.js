@@ -42,7 +42,7 @@ export default function App() {
     const hideSideMenu = async () => {
         await setSideMenuActive(false);
         await setTimeout(() => {
-            setSideMenuVisible(false)
+            setSideMenuVisible(false);
         }, 100)
     }
 
