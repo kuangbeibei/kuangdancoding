@@ -1,7 +1,8 @@
 import React, {
     useState
 } from "react"
-import ReactMarkdown from "react-markdown"
+import ReactMarkdown from "react-markdown";
+import Skeleton from "component/Skeleton";
 
 import {useInterval} from 'hooks'
 

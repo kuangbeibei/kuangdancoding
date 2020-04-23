@@ -5,7 +5,7 @@ A person with the curiosity and interest to web-design became a web developer, a
 
 <br>
 
-This blog mainly focuses on my personal thoughts and experiences regarding fe with relevant codes, and I would also like to occasionally share photos about my cutest naughty cat.
+This blog mainly focuses on my personal thoughts and experiences regarding FE with relevant codes, and I would also like to occasionally share photos about my cutest naughty cat.
 
 <br>
 

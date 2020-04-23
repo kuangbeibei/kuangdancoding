@@ -102,7 +102,7 @@ module.exports = function(webpackEnv) {
             // which in turn let's users customize the target behavior as per their needs.
             postcssNormalize(),
           ],
-          sourceMap: isEnvProduction && shouldUseSourceMap,
+          sourceMap: false,
         },
       },
     ].filter(Boolean);
@@ -110,7 +110,7 @@ module.exports = function(webpackEnv) {
       loaders.push({
         loader: require.resolve(preProcessor),
         options: {
-          sourceMap: isEnvProduction && shouldUseSourceMap,
+          sourceMap: false,
         },
       });
     }
@@ -123,7 +123,7 @@ module.exports = function(webpackEnv) {
     bail: isEnvProduction,
     devtool: isEnvProduction
       ? shouldUseSourceMap
-        ? 'source-map'
+        ? false
         : false
       : isEnvDevelopment && 'cheap-module-source-map',
     // These are the "entry points" to our application.
@@ -227,17 +227,19 @@ module.exports = function(webpackEnv) {
         new OptimizeCSSAssetsPlugin({
           cssProcessorOptions: {
             parser: safePostCssParser,
-            map: shouldUseSourceMap
-              ? {
-                  // `inline: false` forces the sourcemap to be output into a
-                  // separate file
-                  inline: false,
-                  // `annotation: true` appends the sourceMappingURL to the end of
-                  // the css file, helping the browser find the sourcemap
-                  annotation: true,
-                }
-              : false,
-          },
+            map: false
+          }
+          //   map: shouldUseSourceMap
+          //     ? {
+          //         // `inline: false` forces the sourcemap to be output into a
+          //         // separate file
+          //         inline: false,
+          //         // `annotation: true` appends the sourceMappingURL to the end of
+          //         // the css file, helping the browser find the sourcemap
+          //         annotation: true,
+          //       }
+          //     : false,
+          // },
         }),
       ],
       // Automatically split vendor and commons
