@@ -32,3 +32,7 @@ body, div {
 .side-move-show-menu {
   transform: translate(-60px, 0);
 }
+
+a:hover, a:active {
+  color: rgb(29, 161, 242)!important;
+}

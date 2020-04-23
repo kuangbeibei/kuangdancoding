@@ -12,7 +12,7 @@ import Home from "pages/Home";
 import { useWindowOnload } from "hooks";
 
 const About = lazy(() => import('pages/About'));
-const Blog = lazy(() => import('pages/Blog'));
+// const Blog = lazy(() => import('pages/Blog'));
 const Articles = lazy(() => import('pages/Articles'));
 const NoMatch = lazy(() => import('component/NoMatch'));
 
@@ -80,12 +80,12 @@ export default function App() {
                             }}
                         />
 
-                        <Route
+                        {/* <Route
                             path="/blog"
                             component={() => {
                                 return <Main Component={Blog} />;
                             }}
-                        />
+                        /> */}
 
                         <Route
                             path="/articles"

@@ -56,7 +56,7 @@ export default function (props) {
             >
 
                 <div className="info">
-                    <NavLink to="/blog" activeClassName="selected">{`Kuang's blog`}</NavLink>
+                    <NavLink to="/about" activeClassName="selected">{`Kuang's blog`}</NavLink>
                 </div>
 
                 <ul>

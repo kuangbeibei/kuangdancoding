@@ -1,5 +1,8 @@
 ## Hi!
 
+**👉[About Me](/about)**
+
+<br>
 
 This blog mainly focuses on my personal thoughts and experiences regarding fe with relevant codes, and I would also like to occasionally share photos about my cutest naughty cat. 
 

@@ -1,12 +1,12 @@
 import React, {
     useState
 } from "react"
-import ReactMarkdown from "react-markdown"
+import ReactMarkdown from "react-markdown";
 
 import "style/markdown.scss"
 import "./Blog.scss"
 
-const contentPath = require('./blog.md') 
+const contentPath = require('./blog.md')
 
 export default function () {
 
@@ -19,8 +19,8 @@ export default function () {
     return (
         <div className="blog-wrap">
             <section className="blog-section">
-                <ReactMarkdown 
-                    source = {content} 
+                <ReactMarkdown
+                    source={content}
                     escapeHtml={false}
                 />
             </section>
