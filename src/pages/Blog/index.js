@@ -1,5 +1,6 @@
 import React, {
-    useState
+    useState,
+    useEffect
 } from "react"
 import ReactMarkdown from "react-markdown";
 
@@ -12,9 +13,11 @@ export default function () {
 
     const [content, getContent] = useState("");
 
-    fetch(contentPath).then((response) => response.text()).then((text) => {
-        getContent(text)
-    })
+    useEffect(() => {
+        fetch(contentPath).then((response) => response.text()).then((text) => {
+            getContent(text)
+        })
+    }, [])  
 
     return (
         <div className="blog-wrap">

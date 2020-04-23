@@ -1,14 +1,17 @@
-## 关于我：
+## About Me：
 
 
-前端开发经验4年+，非计算机相关专业出身🐱，一直学文科，然而在做新闻的道路上被前端所迷，转而走向技术开发的道路。曾拿到蚂蚁金服的P6 offer但没去。
+A person with the curiosity and interest to web-design became a web developer, and has decided to walk down the road to participate in co-constructing a more interesting and better Internet environment. 
 
-<br />
+<br>
 
-转眼做开发的年限已远超过做新闻的时间。在目前这个阶段，非常想参与打造很厉害的产品，而不仅仅是完成需求～ 因而希望能够加入很棒的团队，和有趣又厉害的同学们一起并肩作战，打造好的产品💪。 这是我现阶段非常非常非常(三连)希望能够实现的事情😻。
+This blog mainly focuses on my personal thoughts and experiences regarding fe with relevant codes, and I would also like to occasionally share photos about my cutest naughty cat.
 
-<br />
+<br>
 
-如果您觉得我不错，欢迎联系我，通过点击github小图标（其实链的是掘金地址🤓️）可以找到我，嘿嘿！
+UI Theme based on [Christian Louboutin](https://demos.creative-tim.com/material-kit-react/#/profile-page)'s Material-Kit-
+React with small tweaks.
 
+<br>
 
+Hope you like my blog! 😛
