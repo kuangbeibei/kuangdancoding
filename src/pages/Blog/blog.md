@@ -1,7 +1,7 @@
 ## Hi!
 
 
-This blog mainly focuses on my personal thoughts and experiences regarding front-end as well as related techniques, and would occasionally share photos about my cutest naughty cat. 
+This blog mainly focuses on my personal thoughts and experiences regarding fe with relevant codes, and I would also like to occasionally share photos about my cutest naughty cat. 
 
 <br>
 
@@ -10,13 +10,6 @@ React with small tweaks.
 
 <br>
 
-[Here](https://github.com/kuangbeibei/my-blog/releases) shows the rough progress of this blog from the beginning to date.
-
-<br>
-
-
-Hope you can get inspiration from my blog! 😛
-
-
+Hope you like my blog! 😛
 
 

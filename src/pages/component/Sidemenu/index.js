@@ -4,14 +4,13 @@ import {withRouter} from "react-router-dom"
 import "./Side-menu.scss"
 
 export default withRouter(function (props) {
-
     const {
         sideMenuActive,
         hideSideMenu,
         history
     } = props;
 
-    const clickLinkTo = (path) => {
+    const clickLinkTo = path => {
         history.push(path);
         hideSideMenu();
     }
@@ -27,21 +26,21 @@ export default withRouter(function (props) {
                         <li>
                             <div className="menu-item">
                                 <button>
-                                    <i className="fab fa-twitter"></i>
+                                    <a href="https://www.instagram.com/danakuang/"><i className="fab fa-instagram"></i></a>
                                 </button>
                             </div>
                         </li>
                         <li>
                             <div className="menu-item">
                                 <button>
-                                    <i className="fab fa-instagram"></i>
+                                    <a href="https://juejin.im/user/5ab45518f265da23914809c5/posts"><i className="fab fa-github"></i></a>
                                 </button>
                             </div>
                         </li>
                         <li>
                             <div className="menu-item">
                                 <button>
-                                    <i className="fab fa-facebook"></i>
+                                    <a href="https://twitter.com/kuang51821034"><i className="fab fa-twitter"></i></a>
                                 </button>
                             </div>
                         </li>

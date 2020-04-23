@@ -93,7 +93,7 @@ function useWindowScroll () {
         return () => window.removeEventListener('scroll', handleScroll);
 	}, [])
 	
-	return (y/6).toFixed(2)
+	return (y/4).toFixed(2)
 }
 
 function useWindowOnload () {

@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+body {
+  color: #3c4858;
+  background-color: #e5e5e5;
+}
+body.overflow-hidden {
+  overflow: hidden;
+}
+
+body, div {
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+}
+
+.wrap-container {
+  position: relative;
+  transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.side-move-show-menu {
+  transform: translate(-60px, 0);
+}

@@ -8,7 +8,6 @@ import Article from "pages/Article"
 import "./Articles.scss"
 
 export default function ({match, history}) {
-    console.log('match ,', match);
     return (
         <>
             <Switch>
