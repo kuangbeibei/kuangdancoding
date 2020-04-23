@@ -33,6 +33,6 @@ body, div {
   transform: translate(-60px, 0);
 }
 
-a:hover, a:active {
+a:hover {
   color: rgb(29, 161, 242)!important;
 }
