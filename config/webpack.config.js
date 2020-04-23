@@ -334,24 +334,11 @@ module.exports = function(webpackEnv) {
             // A missing `test` is equivalent to a match.
             {
               test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-              use: [
-                {
-                  loader: require.resolve('url-loader'),
-                  options: {
-                    limit: 10000,
-                    name: 'static/media/[name].[hash:8].[ext]',
-                  },
-                },
-                {
-                  loader: require('image-webpack-loader'),
-                  optiosn: {
-                      pngquant: {
-                          quality: '65-80'
-                      }
-                  }
-                }
-              ]
-              
+              loader: require.resolve('url-loader'),
+              options: {
+                limit: 10000,
+                name: 'static/media/[name].[hash:8].[ext]',
+              },
             },
             // Process application JS with Babel.
             // The preset includes JSX, Flow, TypeScript, and some ESnext features.
