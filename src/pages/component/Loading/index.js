@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./Loading.scss"
+import "./loading.scss"
 
 export default function (props) {
     const {

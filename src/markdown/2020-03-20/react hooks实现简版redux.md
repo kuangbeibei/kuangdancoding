@@ -1,4 +1,4 @@
-## react hooks实现简版redux🤒.md
+## react hooks实现简版redux🤒
 
 **2020-03-20**
 
