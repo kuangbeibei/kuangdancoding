@@ -1,6 +1,8 @@
 import React from "react";
 
-import "./Loading.scss"
+import "./Loading.scss";
+
+import loading from "../../../img/loading.gif"
 
 export default function (props) {
     const {
@@ -9,10 +11,7 @@ export default function (props) {
 
     return (
         <div className={`loading-wrap ${loadingActive ? "" : "has-opacity"}`}>
-            <div className={`lds-ripple ${loadingActive ? "" : "has-opacity"}`}>
-                <div></div>
-                <div></div>
-            </div>
+            <img src={loading} />
         </div>
     )
 }
