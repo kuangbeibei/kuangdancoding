@@ -12,13 +12,13 @@ const PENDING = 'PENDING';
 const RESOLVED = 'RESOLVED';
 const REJECTED = 'REJECTED';
 
-const resolveFpromise2X = (fpromise2, x, resolve, reject) => {
-    if (fpromise2 === x) return reject('circuclar chaining');
-    if (x !== null && (typeof x === 'object' || typeof x === 'function')) {
+function resolveKpromise2x(kpromise2, x, resolve, reject) {
+    if (kpromise2 === x) return reject('circular chaining');
+    if ( x !== null && (typeof x === 'object' || typeof x === 'function')) {
         try {
             let then = x.then;
             if (typeof then === 'function') {
-                then.call(x, y => resolveFpromise2X(fpromise2, y, resolve, reject), reject)
+                then.call(x, y => resolveKpromise2x(kpromise2, y, resolve, reject), reject)
             } else {
                 resolve(x);
             }
@@ -30,29 +30,30 @@ const resolveFpromise2X = (fpromise2, x, resolve, reject) => {
     }
 }
 
-class Fpromise {
+class Kpromise {
     constructor(executor) {
-        this.status = PENDING;
         this.value = void(0);
         this.reason = void(0);
-        this.onFulfilledCallbacks = [];
-        this.onRejectedCallbacks = [];
+        this.status = PENDING;
+        this.fullfilledFns = [];
+        this.unfullfilledFns = [];
 
         const resolve = value => {
             if (this.status === PENDING) {
-                if ((typeof value === 'object' || typeof value === 'function') && typeof value.then === 'function') {
+                if (value.then && typeof value.then === 'function') {
                     return value.then(resolve, reject);
                 }
                 this.status = RESOLVED;
                 this.value = value;
-                this.onFulfilledCallbacks.forEach(cb => cb(value));
+                this.fullfilledFns.forEach(fn => fn(value))
             }
-        }
+        };
+
         const reject = reason => {
             if (this.status === PENDING) {
                 this.status = REJECTED;
                 this.reason = reason;
-                this.onRejectedCallbacks.forEach(cb => cb(reason));
+                this.unfullfilledFns.forEach(fn => fn(reason));
             }
         }
 
@@ -62,124 +63,118 @@ class Fpromise {
             reject(e)
         }
     }
+
     then(onFulfilled, onRejected) {
-        onFulfilled = onFulfilled ? onFulfilled : () => this.value;
-        onRejected = onRejected ? onRejected : () => {throw Error(this.reason)};
-        let fpromise2, x;
-        fpromise2 = new Fpromise((resolve, reject) => {
+        let kpromise2, x;
+        kpromise2 = new Kpromise((resolve, reject) => {
+            onFulfilled = onFulfilled ? onFulfilled : _ => this.value;
+            onRejected = onRejected ? onRejected : _ => reject(this.reason);
+
             if (this.status === RESOLVED) {
                 setTimeout(() => {
                     try {
                         x = onFulfilled(this.value);
-                        resolveFpromise2X(fpromise2, x, resolve, reject);
+                        resolveKpromise2x(kpromise2, x, resolve, reject);
                     } catch(e) {
                         reject(e)
                     }
-                }, 0)
+                }, 0);
             }
+
             if (this.status === REJECTED) {
                 setTimeout(() => {
                     try {
                         x = onRejected(this.reason);
-                        resolveFpromise2X(fpromise2, x, resolve, reject);
+                        resolveKpromise2x(kpromise2, x, resolve, reject);
                     } catch(e) {
                         reject(e)
                     }
-                }, 0)
+                }, 0);
             }
+
             if (this.status === PENDING) {
-                this.onFulfilledCallbacks.push(value => {
+                this.fullfilledFns.push(value => {
                     setTimeout(() => {
                         try {
                             x = onFulfilled(value);
-                            resolveFpromise2X(fpromise2, x, resolve, reject);
+                            resolveKpromise2x(kpromise2, x, resolve, reject);
                         } catch(e) {
                             reject(e)
                         }
-                    }, 0)
-                })
-                this.onRejectedCallbacks.push(reason => {
-                    setTimeout(() => {
-                        try {
-                            x = onRejected(reason);
-                            resolveFpromise2X(fpromise2, x, resolve, reject);
-                        } catch(e) {
-                            reject(e)
-                        }
-                    }, 0)
+                    }, 0);
+                });
+
+                this.unfullfilledFns.push(reason => {
+                    try {
+                        x = onRejected(reason);
+                        resolveKpromise2x(kpromise2, x, resolve, reject);
+                    } catch(e) {
+                        reject(e)
+                    }
                 })
             }
         })
-        return fpromise2;
+        return kpromise2;
     }
+
     catch(onRejected) {
-        return this.then(null, onRejected)
+        return this.then(null, onRejected);
     }
-    finally(fn) {
-        return new Fpromise((resolve, reject) => {
-            try {
-                fn();
-                return resolve(this.then());
-            } catch(e) {
-                reject(e)
-            }
-        })
-    }
+
     static resolve(value) {
-        return new Fpromise((resolve, reject) => {
-            resolve(value)
+        return new Kpromise((resolve, reject) => {
+            resolve(value);
         })
     }
+
     static reject(reason) {
-        return new Fpromise((resolve, reject) => {
-            reject(reason)
+        return new Kpromise((resolve, reject) => {
+            reject(reason);
         })
     }
-    static all(promises) {
-        if (promises.length === 0) {
-            // 必须有参数
-            return reject('TypeError: not iterable');
-        } 
-        if (!Array.isArray(promises)) {
-            // 参数必须是数组
-            return reject('TypeError: not iterable');
-        }
-        return new Fpromise((resolve, reject) => {
-            const result = [];
-            let len = 0;
-            const processVal = (val, i) => {
-                result[i] = val;
-                if(++len === promises.length) {
+
+    static all(promises) { // 异步并发，遍历 + 计数器
+        if (!Array.isArray(promises) || promises.length === 0) return Kpromise.reject(TypeError('not iterable'));
+        return new Kpromise((resolve, reject) => {
+            let len = promises.length;
+            let count = 0;
+            let result = [];
+            const processData = (val, idx) => {
+                result[idx] = val;
+                if (++count === len) {
                     resolve(result);
                 }
-            }
+            };
             promises.forEach((p, idx) => {
-                if ((typeof p === 'object' || typeof p === 'function') && typeof p.then === 'function') {
-                    p.then(r => processVal(r, i), reject)
+                if (p.then && typeof p.then === 'function') {
+                    p.then(val => processData(val, idx), reject)
                 } else {
-                    processVal(p, idx)
+                    processData(p, idx);
                 }
             })
         })
     }
+
     static race(promises) {
-        return new Fpromise((resolve, reject) => {
-            if (promises.length === 0) {
-                // 必须有参数
-                return reject('TypeError: not iterable');
-            } 
-            if (!Array.isArray(promises)) {
-                // 参数必须是数组
-                return reject('TypeError: not iterable');
-            }
+        if (!Array.isArray(promises) || promises.length === 0) return Kpromise.reject(TypeError('not iterable'));
+        return new Kpromise((resolve, reject) => {
             promises.forEach(p => {
-                if ((typeof p === 'object' || typeof p === 'function') && typeof p.then === 'function') {
+                if (p.then && typeof p.then === 'function') {
                     p.then(resolve, reject)
                 } else {
-                    resolve(p);
-                }
+                    resolve(p)
+                } 
             })
         })
+    }
+
+    finally(fn) {
+        try {
+            fn();
+            return this.then();
+        } catch(e) {
+            Kpromise.reject(e);
+        }
     }
 }
 
