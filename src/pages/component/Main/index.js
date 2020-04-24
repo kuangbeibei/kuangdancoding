@@ -2,14 +2,14 @@
  * 渲染主体结构通用模板
  */
 
-import React from "react"
+import React, {memo} from "react"
 
 import "./Main.scss"
 
 
 // let y;
 
-export default function (props) {
+export default memo(function (props) {
     const {
         Component,
         // scrollTop,
@@ -55,4 +55,4 @@ export default function (props) {
             </div>
         </main>
     )
-}
+})

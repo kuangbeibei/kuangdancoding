@@ -1,9 +1,9 @@
-import React from "react"
+import React, {memo} from "react"
 import {withRouter} from "react-router-dom"
 
 import "./Side-menu.scss"
 
-export default withRouter(function (props) {
+export default withRouter(memo(function (props) {
     const {
         sideMenuActive,
         hideSideMenu,
@@ -70,4 +70,4 @@ export default withRouter(function (props) {
             </div>
         </>
     )
-})
+}))

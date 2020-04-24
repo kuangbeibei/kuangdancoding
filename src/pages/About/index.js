@@ -1,25 +1,27 @@
-import React, {useEffect} from "react";
+import React, {useState, useEffect, memo} from "react";
 import ReactMarkdown from "react-markdown";
-import "style/markdown.scss"
+import "style/markdown.scss";
 
 const contentPath = require('./about.md');
 
-let content = "";
+let aboutContent = "";
 
 export default function () {
+    const [content, getContent] = useState("");
     useEffect(() => {
-        if (!content) {
+        if (!aboutContent) {
             fetch(contentPath).then((response) => response.text()).then((text) => {
-                content = text;
+                getContent(text);
+                aboutContent = text;
             })
-        };
+        }
     }, []);
 
     return (
         <div className="blog-wrap">
             <section className="blog-section">
                 <ReactMarkdown
-                    source={content}
+                    source={content || aboutContent}
                     escapeHtml={false}
                 />
             </section>
