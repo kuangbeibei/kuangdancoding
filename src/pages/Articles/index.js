@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import {Link, Route, Switch} from "react-router-dom"
 
 import ArticleList from "data/data.json"
@@ -7,7 +7,7 @@ import Article from "pages/Article"
 
 import "./Articles.scss"
 
-export default function ({match, history}) {
+export default memo(function ({match, history}) {
     return (
         <>
             <Switch>
@@ -38,4 +38,4 @@ export default function ({match, history}) {
             </Switch>
         </>
     );
-}
+})

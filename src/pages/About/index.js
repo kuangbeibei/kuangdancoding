@@ -1,16 +1,18 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect} from "react";
 import ReactMarkdown from "react-markdown";
 import "style/markdown.scss"
 
 const contentPath = require('./about.md');
 
-export default function () {
-    const [content, getContent] = useState("");
+let content = "";
 
+export default function () {
     useEffect(() => {
-        fetch(contentPath).then((response) => response.text()).then((text) => {
-            getContent(text)
-        })
+        if (!content) {
+            fetch(contentPath).then((response) => response.text()).then((text) => {
+                content = text;
+            })
+        };
     }, []);
 
     return (

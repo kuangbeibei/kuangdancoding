@@ -1,8 +1,8 @@
 import React, {
-    useState
+    useState,
+    memo
 } from "react"
 import ReactMarkdown from "react-markdown";
-import Skeleton from "component/Skeleton";
 
 import {useInterval} from 'hooks'
 
@@ -11,20 +11,20 @@ import "./Article.scss"
 
 const record = {};
 
-export default function ({match, history}) {
+export default memo(function ({match, history}) {
     const {
         date,
         title
     } = match.params;
 
     const [content, getContent] = useState("");
-
     const [count, setCount] = useState(5);
 
     try {
         const contentPath = require(`markdwon/${date}/${decodeURIComponent(title)}.md`) // 这样拿到的是路径，不行
 
         if (!record[title]) {
+            console.log('record[title]', record[title]);
             fetch(contentPath).then((response) => response.text()).then((text) => { // 要这样去拿内容
                 record[title] = text;
                 getContent(text);
@@ -40,7 +40,7 @@ export default function ({match, history}) {
             <div className="article-wrap">
                 <section className="article-section">
                     <ReactMarkdown 
-                        source = {content || record[title]} 
+                        source = {content.current || record[title]} 
                         escapeHtml={false}
                     />
                 </section>
@@ -67,4 +67,4 @@ export default function ({match, history}) {
             </div>
         )
     }
-}
+})
