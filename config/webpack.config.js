@@ -477,18 +477,6 @@ module.exports = function(webpackEnv) {
                 name: 'static/media/[name].[hash:8].[ext]',
               },
             },
-            {
-              test: /\.(gif|png|jpe?g|svg)$/i,
-              use: [
-                {
-                  loader: require.resolve('image-webpack-loader'),
-                  options: {
-                    bypassOnDebug: true, // webpack@1.x
-                    disable: true, // webpack@2.x and newer
-                  },
-                },
-              ],
-            }
             // ** STOP ** Are you adding a new loader?
             // Make sure to add the new loader(s) before the "file" loader.
           ],
