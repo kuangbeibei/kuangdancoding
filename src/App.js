@@ -1,5 +1,5 @@
 import React, { useState, lazy, Suspense, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
 import Loading from "component/Loading";
 import Background from "component/Background";
