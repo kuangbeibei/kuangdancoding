@@ -1,19 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import ReactMarkdown from "react-markdown";
 import "style/markdown.scss"
 
 import "./Home.scss";
-const contentPath = require('./home.md');
 
-export default function (props) {
-    const [content, getContent] = useState("");
-
-    useEffect(() => {
-        fetch(contentPath).then((response) => response.text()).then((text) => {
-            getContent(text)
-        })
-    }, [])    
-
+export default function () {  
     return (
         <div className="home-wrap">
             <div className="avatar">
